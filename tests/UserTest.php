@@ -1,7 +1,11 @@
 <?php declare(strict_types=1);
 
-use PhpParser\Builder\Use_;
+// require_once 'vendor/autoload.php';
+// use PhpParser\Builder\Use_;
+// use src\User;
 use PHPUnit\Framework\TestCase;
+
+require_once 'vendor/composer/autoload_psr4.php';
 
 class UserTest extends TestCase
 {
@@ -24,7 +28,7 @@ class UserTest extends TestCase
 
     public function testFullName()
     {
-        require 'class/User.class.php';
+        require 'src/User.php';
 
         $user = new User();
         $user->firstName = 'woj';
@@ -49,6 +53,6 @@ class UserTest extends TestCase
     public function testFullNameIsEmptyByDefault()
     {
         $user = new User();
-        $this->assertEquals('', $user->getFullName());
+        $this->assertEquals(' ', $user->getFullName());
     }
 }

@@ -11,3 +11,15 @@ class User
         return $this->firstName . ' ' . $this->lastName;
     }
 }
+
+
+/*
+
+die($baseDir . "\n"); // /var/www/html/tescik
+
+die($vendorDir . "\n"); /var/www/html/tescik/vendor
+
+
+
+die($baseDir . "/src" . "\n");  /var/www/html/tescik/src
+*/
