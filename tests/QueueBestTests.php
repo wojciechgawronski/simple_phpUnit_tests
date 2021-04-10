@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
  */
 class QueueTest extends TestCase
 {
-    protected $queue;
+    protected Queue $queue;
 
     /**
      * Sth like fixtures, execute before each method
@@ -79,5 +79,32 @@ class QueueTest extends TestCase
         $this->queue->push('second');
 
         $this->assertEquals('first', $this->queue->pop());
+    }
+
+    public function testMaxNumberOfItemsCanBeAdded() : Queue
+    {
+        require_once 'src/QueueException.php';
+
+        for ($i=0; $i < Queue::MAX_ITEMS; $i++) {
+            $this->queue->push($i);
+        }
+
+        $this->assertEquals(Queue::MAX_ITEMS, $this->queue->getCount());
+
+        return $this->queue;
+    }
+
+    /**
+     * @depends testMaxNumberOfItemsCanBeAdded
+     */
+    public function testExceptionThrowWhenAddingAnItemToFullQueue(Queue $fullQueue)
+    {
+        // sugerowanie klasy odpowiadajacej za wjatek
+        $this->expectException(QueueException::class);
+
+        // oczekiwanie konkrtnej wwiadokosci
+        $this->expectErrorMessage("Queue is full");
+
+        $fullQueue->push('one more element');
     }
 }
