@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
  */
 class QueueTest extends TestCase
 {
-
     protected $queue;
 
     /**
@@ -22,24 +21,38 @@ class QueueTest extends TestCase
     }
 
     /**
-     * This run after each test...
+     * This method run after each test...
      * In this case it provides to produce a lot of object..
      * and this used a lot of Memory.. :(
-     * 
+     *
      * It should be used to external resources like opening new network socked
-     * or creating new file 
+     * or creating new file
      */
-
     protected function tearDown() : void
     {
         unset($this->queue);
     }
 
-    public function testNewQueueuIsEmpty()
+    /**
+     * this method execute once before class
+     * usfull to connect to Database or share fixtures between tests method
+     */
+    public static function setUpBeforeClass() : void
     {
 
-        $this->assertEquals(0, $this->queue->getCount());
+    }
 
+    /**
+     * this method executed ONCE after class
+     */
+    public static function tearDownAfterClass(): void
+    {
+        
+    }
+
+    public function testNewQueueuIsEmpty()
+    {
+        $this->assertEquals(0, $this->queue->getCount());
     }
 
     public function testAnItemIsAddedToTheQueue()
@@ -47,9 +60,8 @@ class QueueTest extends TestCase
         $this->queue->push('woj');
 
         $this->assertEquals(1, $this->queue->getCount());
-
     }
-
+    
     public function testAnItemIsRemoveFromTheQueue()
     {
         $this->queue->push('gaw');
@@ -67,7 +79,7 @@ class QueueTest extends TestCase
     {
         $this->queue->push('first');
         $this->queue->push('second');
-        
+
         $this->assertEquals('first', $this->queue->pop());
     }
 }
