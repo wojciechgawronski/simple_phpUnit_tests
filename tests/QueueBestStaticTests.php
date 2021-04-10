@@ -8,16 +8,14 @@ use PHPUnit\Framework\TestCase;
  */
 class QueueTest extends TestCase
 {
-    protected $queue;
+    protected static $queue;
 
     /**
      * Sth like fixtures, execute before each method
      */
     public function setUp() : void
     {
-        require_once 'src/Queue.php';
-
-        $this->queue = new Queue();
+        static::$queue->clear();
     }
 
     /**
@@ -39,45 +37,51 @@ class QueueTest extends TestCase
      */
     public static function setUpBeforeClass() : void
     {
+        require_once 'src/Queue.php';
+
+        static::$queue = new Queue();
     }
 
     /**
      * this method executed ONCE after class
      */
-    public static function tearDownAfterClass(): void
+    public static function tearDownAfterClass() : void
     {
+        // just examle, but... what if it is a database connection ?
+        // YOU SHOULD CLOSE A DATABASE CONN
+        static::$queue = null;
     }
 
     public function testNewQueueuIsEmpty()
     {
-        $this->assertEquals(0, $this->queue->getCount());
+        $this->assertEquals(0, static::$queue->getCount());
     }
 
     public function testAnItemIsAddedToTheQueue()
     {
-        $this->queue->push('woj');
+        static::$queue->push('woj');
 
-        $this->assertEquals(1, $this->queue->getCount());
+        $this->assertEquals(1, static::$queue->getCount());
     }
     
     public function testAnItemIsRemoveFromTheQueue()
     {
-        $this->queue->push('gaw');
+        static::$queue->push('gaw');
 
-        $item = $this->queue->pop();
+        $item = static::$queue->pop();
 
-        $this->queue->pop();
+        static::$queue->pop();
         
-        $this->assertEquals(0, $this->queue->getCount());
+        $this->assertEquals(0, static::$queue->getCount());
 
         $this->assertEquals('gaw', $item);
     }
 
     public function testAnItemIsRemovedFromTheEndOfTheQueueu()
     {
-        $this->queue->push('first');
-        $this->queue->push('second');
+        static::$queue->push('first');
+        static::$queue->push('second');
 
-        $this->assertEquals('first', $this->queue->pop());
+        $this->assertEquals('first', static::$queue->pop());
     }
 }
