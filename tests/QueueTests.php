@@ -4,31 +4,44 @@ use PHPUnit\Framework\TestCase;
 
 class QueueTest extends TestCase
 {
-    public function testNewQueueIsEmpty()
+
+    /**
+     * Producer
+     */
+    public function testNewQueueuIsEmpty() : Queue
     {
         require_once 'src/Queue.php';
 
         $queue = new Queue;
 
         $this->assertEquals(0, $queue->getCount());
+
+        return $queue;
     }
 
-    public function testAnItemIsAddedToTheQueue()
+    /**
+     * @depends testNewQueueuIsEmpty
+     * Consumer - because dends on Producer
+     */
+    public function testAnItemIsAddedToTheQueue(Queue $queue)
     {
-        $queue = new Queue;
-        
         $queue->push('woj');
 
         $this->assertEquals(1, $queue->getCount());
+
+        return $queue; 
     }
 
-    public function testAnItemIsRemoveFromTheQueue()
+    /**
+     * @depends testNewQueueuIsEmpty
+     */
+    public function testAnItemIsRemoveFromTheQueue(Queue $queue)
     {
-        $queue = new Queue();
-
         $queue->push('gaw');
 
         $item = $queue->pop();
+        
+        $queue->pop();
         
         $this->assertEquals(0, $queue->getCount());
 
