@@ -21,7 +21,7 @@ class QueueTest extends TestCase
 
     /**
      * @depends testNewQueueuIsEmpty
-     * Consumer - because dends on Producer
+     * Consumer - because depends on Producer
      */
     public function testAnItemIsAddedToTheQueue(Queue $queue)
     {
@@ -29,7 +29,7 @@ class QueueTest extends TestCase
 
         $this->assertEquals(1, $queue->getCount());
 
-        return $queue; 
+        return $queue;
     }
 
     /**
@@ -40,7 +40,7 @@ class QueueTest extends TestCase
         $queue->push('gaw');
 
         $item = $queue->pop();
-        
+
         $queue->pop();
         
         $this->assertEquals(0, $queue->getCount());

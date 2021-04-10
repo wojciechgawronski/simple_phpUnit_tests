@@ -22,7 +22,7 @@ class Queue
      */
     public function pop() : mixed
     {
-        return array_pop($this->items);
+        return array_shift($this->items);
     }
 
     /**
