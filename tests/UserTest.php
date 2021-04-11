@@ -97,6 +97,5 @@ class UserTest extends TestCase
         $this->expectException(Exception::class);
 
         $user->notify('Hello');
-
     }
 }
