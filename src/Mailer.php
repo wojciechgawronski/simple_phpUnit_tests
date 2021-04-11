@@ -18,7 +18,8 @@ class Mailer
         // simulate PHPMailer or mail()
         sleep(3);
 
-        echo "Send{$message} tp {$email}";
+        // echo "Send{$message} tp {$email}";
+        echo "send '$message' to '$email'";
 
         return true;
     }

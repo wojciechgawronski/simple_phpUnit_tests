@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "": [
+            "src/"
+        ]
+    },
     "require-dev": {
         "phpunit/phpunit": "^9"
     }
