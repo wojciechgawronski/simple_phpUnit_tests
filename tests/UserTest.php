@@ -61,11 +61,13 @@ class UserTest extends TestCase
         include_once 'src/Mailer.php';
         
         $user = new User();
-
+        
         $mockMailer = $this->createMock(Mailer::class); 
+
+        $user->setMailer($mockMailer);
+
         $mockMailer->method('sendMessage')
             ->willReturn(true);
-
 
         $user->email = 'woj@gaw';
 

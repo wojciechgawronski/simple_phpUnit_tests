@@ -6,19 +6,25 @@ class User
     public string $firstName = '';
     public string $lastName = '';
     public string $email;
+    protected Mailer $mailer;
 
     public function getFullName() : string
     {
         return $this->firstName . ' ' . $this->lastName;
     }
 
+    public function setMailer(Mailer $mailer) : void
+    {
+        $this->mailer = $mailer;
+    }
+
     public function notify( string $message)
     {
-        include_once 'src/Mailer.php';
+        // DEPENDENCY INJECTION 
+        // include_once 'src/Mailer.php';
+        // $mailer = new Mailer();
 
-        $mailer = new Mailer();
-
-        return $mailer->sendMessage($this->email, $message);
+        return $this->mailer->sendMessage($this->email, $message);
     }
 }
 
