@@ -66,11 +66,14 @@ class UserTest extends TestCase
 
         $user->setMailer($mockMailer);
 
-        $mockMailer->method('sendMessage')
+        $mockMailer
+            ->expects($this->once()) // how many times do... here: notify, ed never
+            ->method('sendMessage')
+            ->with($this->equalTo('woj@gaw**'), $this->equalTo('Helloo***'))
             ->willReturn(true);
 
-        $user->email = 'woj@gaw';
+        $user->email = 'woj@gaw**';
 
-        $this->assertTrue($user->notify('hello'));
+        $this->assertTrue($user->notify('Helloo***'));
     }
 }

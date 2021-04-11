@@ -20,7 +20,7 @@ class User
 
     public function notify( string $message)
     {
-        // DEPENDENCY INJECTION 
+        // instend of create onstantion.. DEPENDENCY INJECTION 
         // include_once 'src/Mailer.php';
         // $mailer = new Mailer();
 
