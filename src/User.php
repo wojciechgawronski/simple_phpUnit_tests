@@ -5,10 +5,20 @@ class User
     // zainicjowanie zmiennych przed inicjalizacja obiektu na potrzeby testow, php8
     public string $firstName = '';
     public string $lastName = '';
+    public string $email;
 
     public function getFullName() : string
     {
         return $this->firstName . ' ' . $this->lastName;
+    }
+
+    public function notify( string $message)
+    {
+        include_once 'src/Mailer.php';
+
+        $mailer = new Mailer();
+
+        return $mailer->sendMessage($this->email, $message);
     }
 }
 
