@@ -15,6 +15,10 @@ class Mailer
      */
     public function sendMessage(string $email, string $message): bool
     {
+        if (empty($email)) {
+            throw new Exception;
+        }
+
         // simulate PHPMailer or mail()
         sleep(3);
 

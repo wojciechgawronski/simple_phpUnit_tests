@@ -62,7 +62,7 @@ class UserTest extends TestCase
         
         $user = new User();
         
-        $mockMailer = $this->createMock(Mailer::class); 
+        $mockMailer = $this->createMock(Mailer::class);
 
         $user->setMailer($mockMailer);
 
@@ -75,5 +75,28 @@ class UserTest extends TestCase
         $user->email = 'woj@gaw**';
 
         $this->assertTrue($user->notify('Helloo***'));
+    }
+
+    public function testCannotEmptyNotificationUserByEmail()
+    {
+        $user = new User;
+
+        // instead of this:
+        // $mockMailer = $this->createMock(Mailer::class);
+        // $mockMailer
+        //     ->method('sendMessage')
+        //     ->will($this->throwException(new Exception));
+        // do this:
+
+        $mockMailer = $this->getMockBuilder(Mailer::class)
+                            ->setMethods(null)
+                            ->getMock();
+
+        $user->setMailer($mockMailer);
+
+        $this->expectException(Exception::class);
+
+        $user->notify('Hello');
+
     }
 }
